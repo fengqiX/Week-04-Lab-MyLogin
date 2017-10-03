@@ -9,10 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Main Page</title>
+        <title>Home Page</title>
     </head>
     <body>
-        <h1>Main Page</h1>
-        <p>Hello,${username} <a href="MainPageServlet" >Logout</a></p>
+        <h1>Home Page</h1>
+        <p>Hello,${c.user.username}</p>>
+        <p><a href="login" >Logout</a></p>
     </body>
 </html>

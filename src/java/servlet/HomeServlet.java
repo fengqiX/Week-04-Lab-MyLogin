@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sait.cprg352;
+package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 715583
  */
-public class MainPageServlet extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 
    @Override
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
