@@ -38,8 +38,10 @@ public class HomeServlet extends HttpServlet {
            else
            {
                url= "/WEB-INF/login.jsp";
-               request.setAttribute("action", "logout");
-               getServletContext().getRequestDispatcher(url).forward(request, response);
+               
+             //  request.setAttribute("rememberme", "checked");
+              // getServletContext().getRequestDispatcher(url).forward(request, response);
+              response.sendRedirect("login");
                return;
            }
            

@@ -26,43 +26,75 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
       //TODO if the checkbox is unchecked, 
       String action = request.getParameter("action");
-      System.out.println("action"+action);
-      
+      System.out.println("action: "+action);
+      String username =null;
+      User user = null;
+      Cookie[] cookies =request.getCookies();
+        
+      HttpSession session = request.getSession();
       if(action == null || action.isEmpty() ||action.equals("login"))
       {
-        Cookie[] cookies =request.getCookies();
-        String cookiename = "username";
-        String username =null;
-        User user = null;
-        for(Cookie cookie : cookies)
+        if(session.getAttribute("userlogin")!=null)
         {
-            if(cookie.getName().equals(cookiename))
-            {
-                username = cookie.getValue();
-                System.out.println("username :"+username);
-            }
+            System.out.println(session.getAttribute("userlogin"));
+            response.sendRedirect("home");
+            return ;
         }
-        if(username != null)
+        if(cookies != null)
         {
-            user = new User(username,null);
-            request.setAttribute("user", user);
-           // request.setAttribute("user", user);
-        request.setAttribute("rememberme", "on");
-        
+            String cookiename = "username";
+
+            for(Cookie cookie : cookies)
+            {
+                if(cookie.getName().equals(cookiename))
+                {
+                    username = cookie.getValue();
+                    System.out.println("username :"+username);
+                }
+            }
+            if(username != null)
+            {
+                user = new User(username,null);
+                request.setAttribute("user", user);
+               // request.setAttribute("user", user);
+             //  request.setAttribute("rememberme", "on");
+
+            }
         }
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         return ;
       }
-      else if(action.equals("logout"))
-      {
-          HttpSession session=request.getSession();
+        
+        if(action.equals("logout"))
+        {
+            if(cookies != null)
+        {
+            String cookiename = "username";
+
+            for(Cookie cookie : cookies)
+            {
+                if(cookie.getName().equals(cookiename))
+                {
+                    username = cookie.getValue();
+                    System.out.println("username :"+username);
+                }
+            }
+            if(username != null)
+            {
+                user = new User(username,null);
+                request.setAttribute("user", user);
+               // request.setAttribute("user", user);
+             //  request.setAttribute("rememberme", "on");
+
+            }
+        }
           session.removeAttribute("userlogin");
           System.out.print(session.getAttribute("userlogin"));
           request.setAttribute("display", "Logged out successfully!");
          getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
          return;
-      }
-      
+        }
+        
      }
  
      @Override
@@ -92,6 +124,7 @@ public class LoginServlet extends HttpServlet {
 
            UserService us = new UserService();
           User user = us.login(username, password);
+   //       System.out.println(user.toString());
            if( user == null)
            {
              request.setAttribute("display","Invalid username or password!");
@@ -102,6 +135,7 @@ public class LoginServlet extends HttpServlet {
            else
            {
                //String path = getServletContext().getRealPath("/WEB-INF/home.jsp");
+               System.out.println("username: "+username+", password:"+password);
                if(rememberme==true)
                {
                    Cookie cookie = new Cookie("username", username);

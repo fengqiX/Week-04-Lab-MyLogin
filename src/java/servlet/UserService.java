@@ -16,9 +16,10 @@ public class UserService {
     public User login(String name,String password)
     {
         User user=null;
-        if((name.trim().equals("adam")) || (name.trim().equals("betty") ) && password.equals("password") ) 
+        if((name.trim().equals("adam") || name.trim().equals("betty") ) && password.equals("password") ) 
         {
             user = new User(name,null);
+            System.out.println();
         }
         return user;
     }
