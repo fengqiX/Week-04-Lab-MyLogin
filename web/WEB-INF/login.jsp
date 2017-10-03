@@ -9,14 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>My Login</title>
+        <title>Remember Me Login Page</title>
     </head>
     <body>
         <h1>Login</h1>
-        <form action="index" method="post">
-            <p>Username:<input type="text" name="Uname" value="${username}"></p>
-            <p>Password:<input type="text" name="Pword" value="${password}"></p>
+        <form action="" method="post">
+            <p>Username:<input type="text" name="Uname" value="${user.username}"></p>
+            <p>Password:<input type="text" name="Pword" value="${user.password}"></p>
             <input type="submit" value="Login">
+            <p><input type="checkbox" name="rememberme">Remember me</p>
         </form>
             ${display}
     </body>
