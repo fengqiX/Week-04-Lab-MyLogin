@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
       String action = request.getParameter("action");
       System.out.println("action"+action);
       
-      if(action == null || action.isEmpty())
+      if(action == null || action.isEmpty() ||action.equals("login"))
       {
         Cookie[] cookies =request.getCookies();
         String cookiename = "username";
@@ -57,6 +57,7 @@ public class LoginServlet extends HttpServlet {
       {
           HttpSession session=request.getSession();
           session.removeAttribute("userlogin");
+          System.out.print(session.getAttribute("userlogin"));
           request.setAttribute("display", "Logged out successfully!");
          getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
          return;
